@@ -52,7 +52,7 @@ def main():
         # 画面更新
         pg.display.update()
         tmr += 1
-        clock.tick(2000)  # FPSを200に設定
+        clock.tick(200)  # FPSを200に設定
 
 if __name__ == "__main__":
     pg.init()
