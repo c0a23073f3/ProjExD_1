@@ -21,37 +21,41 @@ def main():
 
     # 背景の初期位置
     bg_x = 0
-    tmr = 0
 
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
 
+        # 背景を常に左に流す
+        bg_x = (bg_x - 1) % bg_width
+
         # 押下キーの取得
         key_lst = pg.key.get_pressed()
-        if key_lst[pg.K_UP]: 
-            kk_rct.move_ip(0, -1)
-        if key_lst[pg.K_DOWN]: 
-            kk_rct.move_ip(0, 1)
-        if key_lst[pg.K_LEFT]: 
+
+        # こうかとんの移動処理
+        if key_lst[pg.K_UP]:
+            kk_rct.move_ip(0, -1)  # 上へ
+        if key_lst[pg.K_DOWN]:
+            kk_rct.move_ip(0, 1)   # 下へ
+        if key_lst[pg.K_LEFT]:
+            kk_rct.move_ip(-1, 0)  # 左へ
+        if key_lst[pg.K_RIGHT]:
+            kk_rct.move_ip(1, 0)   # 右へ
+        else:
+            # 何も操作しない場合は背景と同じ速度で後ろに流される
             kk_rct.move_ip(-1, 0)
-        if key_lst[pg.K_RIGHT]: 
-            kk_rct.move_ip(1, 0)
 
-        # 背景を右から左に移動
-        bg_x = (bg_x - 1) % bg_width  # ループ処理
-
-        # 背景の描画
+        # 背景の描画（ループ処理）
         screen.blit(bg_img, [bg_x - bg_width, 0])  # 左側の背景
-        screen.blit(bg_img, [bg_x, 0])
+        screen.blit(bg_img, [bg_x, 0])  # 右側の背景
 
-        
+        # こうかとんの描画
         screen.blit(kk_img, kk_rct)
 
+        # 画面更新
         pg.display.update()
-        tmr += 1
-        clock.tick(200)
+        clock.tick(200)  # FPSを200に設定
 
 if __name__ == "__main__":
     pg.init()
