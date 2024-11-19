@@ -44,15 +44,14 @@ def main():
 
         # 背景の描画
         screen.blit(bg_img, [bg_x - bg_width, 0])  # 左側の背景
-        screen.blit(bg_img, [bg_x, 0])  # 右側の背景
+        screen.blit(bg_img, [bg_x, 0])
 
-        # こうかとんの描画
+        
         screen.blit(kk_img, kk_rct)
 
-        # 画面更新
         pg.display.update()
         tmr += 1
-        clock.tick(200)  # FPSを200に設定
+        clock.tick(200)
 
 if __name__ == "__main__":
     pg.init()
