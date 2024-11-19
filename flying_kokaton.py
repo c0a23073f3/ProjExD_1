@@ -32,21 +32,22 @@ def main():
 
         # 押下キーの取得
         key_lst = pg.key.get_pressed()
+        move_x, move_y = 0, 0  # 移動量を初期化
 
-        # こうかとんの移動処理
+        # 矢印キーに応じて移動量を設定
         if key_lst[pg.K_UP]:
-            kk_rct.move_ip(0, -1)  # 上へ
+            move_y -= 1
         if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip(0, 1)   # 下へ
+            move_y += 1
         if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip(-1, 0)  # 左へ
+            move_x -= 1
         if key_lst[pg.K_RIGHT]:
-            kk_rct.move_ip(1, 0)   # 右へ
+            move_x += 1
         else:
-            # 何も操作しない場合は背景と同じ速度で後ろに流される
-            kk_rct.move_ip(-1, 0)
+            move_x -= 1
 
-        # 背景の描画（ループ処理）
+        kk_rct.move_ip(move_x, move_y)
+
         screen.blit(bg_img, [bg_x - bg_width, 0])  # 左側の背景
         screen.blit(bg_img, [bg_x, 0])  # 右側の背景
 
